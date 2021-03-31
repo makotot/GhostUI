@@ -1,7 +1,7 @@
 describe('ReadingProgress', () => {
   describe('0%', () => {
     beforeEach(() => {
-      cy.visit('/').viewport('iphone-x');
+      cy.visit('/reading-progress/general').viewport('iphone-x');
       cy.scrollTo('top');
     });
 
@@ -12,7 +12,7 @@ describe('ReadingProgress', () => {
 
   describe('100%', () => {
     beforeEach(() => {
-      cy.visit('/').viewport('iphone-x');
+      cy.visit('/reading-progress/general').viewport('iphone-x');
       cy.scrollTo('bottom');
     });
 

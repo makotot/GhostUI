@@ -7,7 +7,3 @@ export const calc = ({ value, total }: { value: number; total: number }) => {
 
   return result * 100;
 };
-
-export const percentage = {
-  calc,
-};
