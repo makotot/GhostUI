@@ -1,4 +1,4 @@
-import { percentage } from '.';
+import * as percentage from '.';
 
 describe('percentage', () => {
   describe('calc', () => {
