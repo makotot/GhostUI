@@ -13,7 +13,7 @@ export const useReadingProgress = (props?: HookProps) => {
       target,
       root,
     };
-  }, [props?.targetEl, props?.rootEl]);
+  }, [props]);
   const el = useRef<{
     target: Element | HTMLElement | null;
     root: Element | HTMLElement | (Window & typeof globalThis) | null;
@@ -30,7 +30,7 @@ export const useReadingProgress = (props?: HookProps) => {
           document.documentElement.clientHeight,
           window.innerHeight || 0
         );
-  }, [props?.rootEl, el.current?.root]);
+  }, [props, el]);
 
   const maxRef = useRef(0);
   const measure = useCallback(() => {
@@ -47,7 +47,7 @@ export const useReadingProgress = (props?: HookProps) => {
       : window.pageYOffset || document.documentElement.scrollTop;
 
     updateValue(value);
-  }, [el.current?.root, props?.rootEl]);
+  }, [el, props]);
 
   const handleResize = useCallback(
     optimization.debounce(() => {
@@ -69,6 +69,7 @@ export const useReadingProgress = (props?: HookProps) => {
     }
     window.addEventListener('resize', handleResize);
     measure();
+    update();
 
     return () => {
       if (el.current?.root) {
@@ -76,7 +77,7 @@ export const useReadingProgress = (props?: HookProps) => {
       }
       window.removeEventListener('resize', handleResize);
     };
-  }, [handleScroll, handleResize, measure]);
+  }, [handleScroll, handleResize, measure, update]);
 
   return {
     value,
