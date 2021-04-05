@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         node: ['12.x', '14.x']
-        os: [windows-latest, macOS-latest]
+        os: [macOS-latest]
 
     steps:
       - name: Checkout repo
