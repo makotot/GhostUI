@@ -28,7 +28,8 @@ export const SpecificRootAndTarget = () => {
         id="article-wrapper"
         style={{
           height: '300px',
-          overflowX: 'scroll',
+          overflowX: 'hidden',
+          overflowY: 'auto',
         }}
       >
         <div id="article-section">

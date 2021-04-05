@@ -7,8 +7,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node: ['10.x', '12.x', '14.x']
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        node: ['12.x', '14.x']
+        os: [windows-latest, macOS-latest]
 
     steps:
       - name: Checkout repo
@@ -22,11 +22,28 @@ jobs:
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
 
+      - name: Install deps on example
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: ./example
+
       - name: Lint
         run: npm run lint
 
       - name: Test
         run: npm run test --ci --coverage --maxWorkers=2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run start --prefix example/
+          wait-on: 'http://localhost:1234'
+
+      # - uses: actions/upload-artifact@v1
+      #   if: always()
+      #   with:
+      #     name: cypress-videos
+      #     path: cypress/videos
 
       - name: Build
         run: npm run build
