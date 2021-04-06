@@ -32,6 +32,10 @@ jobs:
         with:
           start: npm run start --prefix example/
           wait-on: 'http://localhost:1234'
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - uses: actions/upload-artifact@v1
       #   if: always()
       #   with:
