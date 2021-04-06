@@ -1,0 +1,43 @@
+name: CI
+on: [pull_request]
+jobs:
+  build:
+    name: E2E on Node ${{ matrix.node }} and ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node: ['14.x']
+        os: [macOS-latest]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Use Node ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install deps and build (with cache)
+        uses: bahmutov/npm-install@v1
+
+      - name: Install deps on example
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: ./example
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run start --prefix example/
+          wait-on: 'http://localhost:1234'
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - uses: actions/upload-artifact@v1
+      #   if: always()
+      #   with:
+      #     name: cypress-videos
+      #     path: cypress/videos

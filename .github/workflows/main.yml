@@ -33,17 +33,5 @@ jobs:
       - name: Test
         run: npm run test --ci --coverage --maxWorkers=2
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm run start --prefix example/
-          wait-on: 'http://localhost:1234'
-
-      # - uses: actions/upload-artifact@v1
-      #   if: always()
-      #   with:
-      #     name: cypress-videos
-      #     path: cypress/videos
-
       - name: Build
         run: npm run build

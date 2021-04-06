@@ -1,4 +1,5 @@
 {
+  "projectId": "ipjs5c",
   "baseUrl": "http://localhost:1234",
   "retries": 2,
   "video": false,
