@@ -25,7 +25,7 @@ describe('Scrollspy', () => {
     it('should make 3nd nav active when 3nd section looks like in the viewport with offset=-100', () => {
       cy.scrollTo(0, 950);
       cy.get('[data-cy=nav-item]')
-        .eq(1)
+        .eq(2)
         .should('have.class', 'active');
     });
   });
