@@ -1,3 +1,4 @@
 import { ReadingProgress } from './ReadingProgress';
+import { Scrollspy } from './Scrollspy';
 
-export { ReadingProgress };
+export { ReadingProgress, Scrollspy };
