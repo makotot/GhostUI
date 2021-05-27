@@ -1,4 +1,4 @@
-import { ReadingProgress } from './ReadingProgress';
-import { Scrollspy } from './Scrollspy';
+import { ReadingProgress, useReadingProgress } from './ReadingProgress';
+import { Scrollspy, useScrollspy } from './Scrollspy';
 
-export { ReadingProgress, Scrollspy };
+export { ReadingProgress, Scrollspy, useReadingProgress, useScrollspy };

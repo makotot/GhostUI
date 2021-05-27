@@ -1,6 +1,8 @@
 import { RefObject } from 'react';
 import { useScrollspy } from './useScrollspy';
 
+export { useScrollspy };
+
 export const Scrollspy = ({
   children,
   sectionRefs,
