@@ -34,8 +34,18 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "ghostui",
+  "name": "@makotot/ghostui",
   "author": "makotot",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "headless",
+    "react",
+    "component",
+    "hooks",
+    "render props"
+  ],
   "module": "dist/ghostui.esm.js",
   "size-limit": [
     {
