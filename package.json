@@ -22,7 +22,8 @@
     "cy:run": "cypress run",
     "cy:run:chrome": "cypress run --browser chrome",
     "cy:run:firefox": "cypress run --browser firefox",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "semantic-release:dry-run": "semantic-release -d"
   },
   "peerDependencies": {
     "react": ">=16"
