@@ -27,12 +27,6 @@
   "peerDependencies": {
     "react": ">=16"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npx tsdx lint",
-      "commit-msg": "npx commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "prettier": {
     "printWidth": 80,
     "semi": true,
