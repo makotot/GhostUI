@@ -29,7 +29,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "npx tsdx lint",
+      "commit-msg": "npx commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "prettier": {
@@ -68,7 +69,7 @@
     "size-limit": "4.11.0",
     "tsdx": "0.14.1",
     "tslib": "2.2.0",
-    "typescript": "4.2.4"
+    "typescript": "4.3.2"
   },
   "repository": {
     "type": "git",
