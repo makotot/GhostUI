@@ -61,7 +61,7 @@
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
     "@size-limit/preset-small-lib": "5.0.1",
-    "@types/react": "17.0.13",
+    "@types/react": "17.0.14",
     "@types/react-dom": "17.0.9",
     "@types/react-router-dom": "5.1.8",
     "concurrently": "6.2.0",
