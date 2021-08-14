@@ -14,6 +14,7 @@ $ npm i @makotot/ghostui
 
 - [Scrollspy](./src/Scrollspy)
 - [ReadingProgress](./src/ReadingProgress)
+- [Pagination](./src/Pagination)
 
 ## Authors
 
