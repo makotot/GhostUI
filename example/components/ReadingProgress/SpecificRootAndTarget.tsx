@@ -6,7 +6,7 @@ export const SpecificRootAndTarget = () => {
   return (
     <div>
       <ReadingProgress rootEl="#article-wrapper" targetEl="#article-section">
-        {({ percentageOfValue }) => (
+        {({ value }) => (
           <div
             style={{
               position: 'fixed',
@@ -15,11 +15,7 @@ export const SpecificRootAndTarget = () => {
               right: 0,
             }}
           >
-            <progress
-              id="reading-progress"
-              value={percentageOfValue}
-              max={100}
-            />
+            <progress id="reading-progress" value={value} max={100} />
           </div>
         )}
       </ReadingProgress>
