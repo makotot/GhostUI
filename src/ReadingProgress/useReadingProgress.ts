@@ -1,87 +1,46 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { HookProps } from './type';
-import { percentage, optimization } from '../utils';
+import { optimization } from '../utils';
+import { ReadingProgress } from './core';
 
 export const useReadingProgress = (props?: HookProps) => {
-  const getEl = useCallback(() => {
-    const target = props?.targetEl
-      ? document.querySelector(props.targetEl)
-      : document.body;
-    const root = props?.rootEl ? document.querySelector(props.rootEl) : window;
-
-    return {
-      target,
-      root,
-    };
-  }, [props]);
-  const el = useRef<{
-    target: Element | HTMLElement | null;
-    root: Element | HTMLElement | (Window & typeof globalThis) | null;
-  }>();
+  const rp = useRef<ReadingProgress>();
 
   useEffect(() => {
-    el.current = getEl();
-  }, [getEl]);
+    rp.current = new ReadingProgress({
+      rootEl: props?.rootEl,
+      targetEl: props?.targetEl,
+    });
+  }, [props]);
 
-  const measureViewportHeight = useCallback(() => {
-    return props?.rootEl
-      ? (el.current?.root as HTMLElement).clientHeight
-      : Math.max(
-          document.documentElement.clientHeight,
-          window.innerHeight || 0
-        );
-  }, [props, el]);
+  const [value, updateProgressValue] = useState(rp.current?.getProgress() || 0);
 
-  const maxRef = useRef(0);
-  const measure = useCallback(() => {
-    const targetHeight =
-      el.current?.target?.getBoundingClientRect().height || 0;
-    const viewportHeight = measureViewportHeight();
-    maxRef.current = Math.round(targetHeight - viewportHeight);
-  }, [measureViewportHeight]);
-
-  const [value, updateValue] = useState(0);
   const update = useCallback(() => {
-    const value = props?.rootEl
-      ? (el.current?.root as HTMLElement).scrollTop
-      : window.pageYOffset || document.documentElement.scrollTop;
-
-    updateValue(value);
-  }, [el, props]);
-
-  const handleResize = useCallback(
-    optimization.debounce(() => {
-      measure();
-    }),
-    [measure]
-  );
-
-  const handleScroll = useCallback(
+    updateProgressValue(rp.current?.getProgress() || 0);
+  }, []);
+  const debounceUpdate = useCallback(
     optimization.debounce(() => {
       update();
     }),
-    [update]
+    []
   );
 
   useEffect(() => {
-    if (el.current?.root) {
-      el.current.root.addEventListener('scroll', handleScroll);
+    if (rp.current?.rootSelector) {
+      rp.current.rootSelector.addEventListener('scroll', debounceUpdate);
     }
-    window.addEventListener('resize', handleResize);
-    measure();
+    window.addEventListener('resize', debounceUpdate);
     update();
 
     return () => {
-      if (el.current?.root) {
-        el.current.root.removeEventListener('scroll', handleScroll);
+      if (rp.current?.rootSelector) {
+        rp.current.rootSelector.removeEventListener('scroll', debounceUpdate);
       }
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', debounceUpdate);
     };
-  }, [handleScroll, handleResize, measure, update]);
+  }, [update, debounceUpdate]);
 
   return {
     value,
-    max: maxRef.current,
-    percentageOfValue: percentage.calc({ value, total: maxRef.current }),
   };
 };
