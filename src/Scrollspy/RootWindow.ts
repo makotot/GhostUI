@@ -6,7 +6,7 @@ export class RootWindow extends Root {
   }
 
   get scrollTop() {
-    return document.documentElement.scrollTop;
+    return Math.round(document.documentElement.scrollTop);
   }
 
   get scrollHeight() {
