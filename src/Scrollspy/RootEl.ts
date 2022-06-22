@@ -17,7 +17,7 @@ export class RootEl extends Root {
   }
 
   get scrollTop() {
-    return this.el.scrollTop;
+    return Math.round(this.el.scrollTop);
   }
 
   get scrollHeight() {
